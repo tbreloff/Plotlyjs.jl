@@ -53,7 +53,7 @@ function savefig_imagemagick(p::SyncPlot, fn::AbstractString; js::Symbol=:local
     # if html we don't need a plot window
     if suf == "html"
         open(fn, "w") do f
-            writemime(f, MIME"text/html"(), p, js)
+            show(f, MIME"text/html"(), p, js)
         end
         return p
     end
@@ -108,7 +108,7 @@ function savefig(p::SyncPlot, fn::AbstractString; js::Symbol=:local)
     # if html we don't need a plot window
     if suf == "html"
         open(fn, "w") do f
-            writemime(f, MIME"text/html"(), p, js)
+            show(f, MIME"text/html"(), p, js)
         end
         return p
     end
@@ -202,7 +202,7 @@ const _mimeformats =  Dict("application/eps"         => "eps",
 # TODO: replace ElectronPlot with SyncPlot once I figure out how to get
 #       img_data from within IJulia
 for (mime, fmt) in _mimeformats
-    @eval function Base.writemime(io::IO, ::MIME{symbol($mime)}, p::ElectronPlot)
+    @eval function Base.show(io::IO, ::MIME{Symbol($mime)}, p::ElectronPlot)
         @eval import ImageMagick
 
         # construct a magic wand and read the image data from png

@@ -84,7 +84,7 @@ if _isijulia()
     const _ijulia_return_comms = Dict{Base.Random.UUID,Comm}()
 
     IJulia.display_dict(p::Plot) =
-        Dict("text/plain" => sprint(writemime, "text/plain", p))
+        Dict("text/plain" => sprint(show, "text/plain", p))
 
     function IJulia.display_dict(p::JupyterPlot)
         if p.view.displayed

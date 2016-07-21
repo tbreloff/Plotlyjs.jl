@@ -241,6 +241,7 @@ end
             @test v["y1"] == _want_i(b2, i)
         end
 
+        # TODO: this has a stack overflow... should b1 and b2 be scalars??
         hl = hline(a, b1, b2)
         for (i, h) in enumerate(hl)
             @test h["y0"] == _want_i(a, i)
